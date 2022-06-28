@@ -8,7 +8,7 @@ import SearchMeals from './SearchMeals';
 import apiRequest from './apiRequest';
 
 function App() {
-  const API_URL = 'http://localhost:3000/meals';
+  const API_URL = 'http://localhost:3001/meals';
 
 //Local Storage Use State
 {/*const [meals, setMeals] = useState(JSON.parse(localStorage.getItem('mealList')) || []); */}

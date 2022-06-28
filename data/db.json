@@ -1,3 +1,11 @@
 {
-  "meals": []
+  "meals": [
+    {
+      "id": 1,
+      "name": "Whey Protein",
+      "carbs": "4",
+      "fats": "4",
+      "protein": "25"
+    }
+  ]
 }
