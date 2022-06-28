@@ -5,29 +5,29 @@ import Meals from './Meals';
 import Footer from './Footer';
 import AddMeal from './AddMeal';
 import SearchMeals from './SearchMeals';
-import apiRequest from './apiRequest';
+//import apiRequest from './apiRequest';
 
 function App() {
-  const API_URL = 'http://localhost:3001/meals';
+  //const API_URL = 'http://localhost:3001/meals';
 
 //Local Storage Use State
-{/*const [meals, setMeals] = useState(JSON.parse(localStorage.getItem('mealList')) || []); */}
+const [meals, setMeals] = useState(JSON.parse(localStorage.getItem('mealList')) || []);
 
-  const [meals, setMeals] = useState([]);
+  //const [meals, setMeals] = useState([]);
   const [newFoodName, setNewFoodName] = useState('')
   const [newFoodCarbs, setNewFoodCarbs] = useState('')
   const [newFoodFats, setNewFoodFats] = useState('')
   const [newFoodProtein, setNewFoodProtein] = useState('')
   const [search, setSearch] = useState('');
-  const [fetchError, setFetchError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  //const [fetchError, setFetchError] = useState(null);
+  //const [isLoading, setIsLoading] = useState(true);
 
   //Retrieve from localStorage
-  {/* useEffect(() => {
-    localStorage.setItem('mealList', JSON.stringify(meals));
-  }, [meals]); */}
-
   useEffect(() => {
+    localStorage.setItem('mealList', JSON.stringify(meals));
+  }, [meals]); 
+
+  {/* useEffect(() => {
     const fetchItems = async () => {
       try {
         const response = await fetch(API_URL);
@@ -44,7 +44,7 @@ function App() {
     setTimeout(() => {
       (async () => await fetchItems())();
     }, 2000)
-  }, [])
+  }, []) */}
 
   const addFoodItem = async (name, carbs, fats, protein) => {
     const id = meals.length ? meals[meals.length -1].id +1 : 1;
@@ -52,7 +52,7 @@ function App() {
     const listMeals = [...meals, myNewFood];
     setMeals(listMeals);
 
-    const postOptions = {
+    {/*const postOptions = {
       method: 'POST',
       headers: {
         'Content-Type' : 'application/json'
@@ -61,18 +61,19 @@ function App() {
     }
     const result = await apiRequest(API_URL, postOptions)
     if(result) setFetchError(result);
-  }
+  } */}
+}
 //rest api
 
   const handleDelete = async (id) =>{
     const listMeals = meals.filter((meal) => meal.id !== id);
     setMeals(listMeals);
 
-    const deleteOptions = { method: 'DELETE' };
+    {/* const deleteOptions = { method: 'DELETE' };
     const reqUrl = `${API_URL}/${id}` ;
 
     const result = await apiRequest(reqUrl, deleteOptions)
-    if(result) setFetchError(result);
+  if(result) setFetchError(result); */}
   }
 
   const handleSubmit = (e) => {
@@ -113,17 +114,19 @@ function App() {
         search={search}
         setSearch={setSearch}
       />
-      <main>
+      <>
+      {/* <main>
         {isLoading && <p>Loading Meals...</p>}
         {fetchError && <p style={{ color: "red"}}>{`Error: ${fetchError}`}</p>}
         {!fetchError && !isLoading &&
+        */}
+      </>
         <Meals 
           meals = {meals.filter(meal => ((meal.name).toLowerCase()).includes
             (search.toLowerCase()))}
           handleDelete = {handleDelete}
           calculateCalories = {calculateCalories}
-        />}
-    </main>
+        />
     <Footer length={meals.length}/>
     </div>
 
